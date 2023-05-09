@@ -8,7 +8,7 @@
 import Foundation
 
 extension Bundle {
-    func decode(_ file: String) -> [String: Astronaut] {
+    func decode<T: Codable>(_ file: String) -> T {
         guard let url = self.url(forResource: file, withExtension: nil) else { // Locating the file in the Bundle.
             fatalError("Failed to locate \(file) in bundle.")
         }
@@ -19,7 +19,7 @@ extension Bundle {
         
         let decoder = JSONDecoder()
         
-        guard let loaded = try? decoder.decode([String: Astronaut].self, from: data) else { // Decoding the JSON file with Astronaut type.
+        guard let loaded = try? decoder.decode(T.self, from: data) else { // Decoding the JSON file with Astronaut type.
             fatalError("Failed to decode \(file) from bundle.")
         }
         
