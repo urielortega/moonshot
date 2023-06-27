@@ -65,6 +65,7 @@ struct GridLayout: View {
                             .scaledToFit()
                             .frame(width: 100, height: 100)
                             .padding()
+                            .accessibilityLabel("The mission badge for \(mission.displayName)")
                         
                         VStack {
                             Text(mission.displayName)
@@ -84,6 +85,9 @@ struct GridLayout: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(.lightBackground)
                     )
+                    .accessibilityElement()
+                    .accessibilityLabel(mission.displayName)
+                    .accessibilityHint("Launch date: \(mission.formattedLaunchDate == "N/A" ? "Not available" : mission.formattedLaunchDate)")
                 }
             }
         }

@@ -42,7 +42,7 @@ struct MissionView: View {
             if let astronaut = astronauts[member.name] {
                 return CrewMember(role: member.role, astronaut: astronaut)
             } else {
-                fatalError("Missiong \(member.name)")
+                fatalError("Missing \(member.name)")
             }
         }
     }
@@ -68,6 +68,7 @@ struct MissionBadge: View {
                 .scaledToFit()
                 .frame(maxWidth: geometry.size.width * 0.6) // 60% of the available screen width
                 .padding(.vertical)
+                .accessibilityLabel("The mission badge for \(mission.displayName)")
             
             Text(mission.detailedLaunchDate)
                 .font(.subheadline)
@@ -99,6 +100,7 @@ struct CrewView: View {
                                 Text(crewMember.astronaut.name)
                                     .foregroundColor(.white)
                                     .font(.headline)
+                                    .accessibilityLabel(crewMember.astronaut.name.replacingOccurrences(of: ".", with: " "))
                                 
                                 Text(crewMember.role)
                                     .foregroundColor(.secondary)
